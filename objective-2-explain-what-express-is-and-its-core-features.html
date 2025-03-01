@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Objective 2 - Explain What Express Is and Its Core Features</title>
+    <meta name="identifier" content="g1d28e3ed6b8ace11ae5c3f4afc120ec9"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Express.js Framework</h1>
+            <p class="text-xl text-gray-700">Understanding Express and Its Core Features</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Introduction Video</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Express JS Video" 
+                    src="https://fast.wistia.net/embed/iframe/49e1wq9cgt" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- What is Express? -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">What is Express?</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p class="text-lg">
+                    Express is a minimal and flexible Node.js web application framework that provides a robust set of 
+                    features for web and mobile applications. It sits on top of Node.js's built-in HTTP module, 
+                    simplifying its APIs and adding helpful new features.
+                </p>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                    <p class="text-blue-800">
+                        Think of Express as a layer built on top of Node.js that helps manage servers and routes.
+                        It's like a toolset that makes it much easier to build web applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Cases Grid -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">What Can You Build with Express?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-gray-50 rounded-lg">
+                    <div class="w-12 h-12 bg-[#93005a] rounded-full flex items-center justify-center text-white mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Web Applications</h3>
+                    <p class="text-gray-700 text-sm">Full-featured web applications with server-side rendering</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg">
+                    <div class="w-12 h-12 bg-[#00808c] rounded-full flex items-center justify-center text-white mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">RESTful APIs</h3>
+                    <p class="text-gray-700 text-sm">JSON-based web services and APIs</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-lg">
+                    <div class="w-12 h-12 bg-[#93005a] rounded-full flex items-center justify-center text-white mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Real-time Apps</h3>
+                    <p class="text-gray-700 text-sm">WebSocket and WebRTC based applications</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Features -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Core Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Left Column -->
+                <div class="space-y-6">
+                    <div class="border-l-4 border-[#00808c] pl-4">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Middleware</h3>
+                        <p class="text-gray-700">
+                            Functions that have access to the request and response objects. They can:
+                        </p>
+                        <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1 text-sm">
+                            <li>Execute any code</li>
+                            <li>Modify request/response objects</li>
+                            <li>End request-response cycle</li>
+                            <li>Call next middleware</li>
+                        </ul>
+                    </div>
+                    <div class="border-l-4 border-[#93005a] pl-4">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Routing</h3>
+                        <p class="text-gray-700">
+                            Table of contents for your application, determining how it responds to client requests to 
+                            particular endpoints (URIs) and methods.
+                        </p>
+                    </div>
+                </div>
+                <!-- Right Column -->
+                <div class="space-y-6">
+                    <div class="border-l-4 border-[#00808c] pl-4">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Static File Serving</h3>
+                        <p class="text-gray-700">
+                            Built-in middleware for serving static files like images, CSS, and JavaScript.
+                        </p>
+                        <div class="bg-gray-900 rounded mt-2 p-3">
+                            <code class="text-gray-100 text-xs">app.use(express.static('public'));</code>
+                        </div>
+                    </div>
+                    <div class="border-l-4 border-[#93005a] pl-4">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Template Engines</h3>
+                        <p class="text-gray-700">
+                            Support for multiple template engines to generate HTML dynamically.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pros and Cons -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <!-- Benefits -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <h3 class="text-xl font-bold text-[#00808c] mb-4">Benefits</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-green-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="text-gray-700">Simple and unopinionated</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-green-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="text-gray-700">Extensible with middleware</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-green-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="text-gray-700">Large ecosystem of plugins</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-green-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="text-gray-700">Easy to learn and use</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Drawbacks -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <h3 class="text-xl font-bold text-[#93005a] mb-4">Drawbacks</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-red-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        <span class="text-gray-700">Not a full-featured framework out of the box</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-red-500 mt-1 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        <span class="text-gray-700">Requires more decision-making due to flexibility</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Follow Along Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Your First Express Server</h2>
+            <div class="space-y-6">
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Setup Steps</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Create a new file: <code class="bg-gray-200 rounded px-2 py-1">server.js</code></li>
+                        <li>Initialize npm: <code class="bg-gray-200 rounded px-2 py-1">npm init -y</code></li>
+                        <li>Install Express: <code class="bg-gray-200 rounded px-2 py-1">npm install express</code></li>
+                    </ol>
+                </div>
+
+                <div class="bg-gray-900 rounded-lg p-6 overflow-x-auto">
+                    <pre class="text-gray-100 text-sm"><code>const express = require('express'); // import the express package
+
+const server = express(); // creates the server
+
+// handle requests to the root of the api, the / route
+server.get('/', (req, res) => {
+    res.send('Hello from Express');
+});
+
+// watch for connections on port 9000
+server.listen(9000, () =>
+    console.log('Server running on http://localhost:9000')
+);</code></pre>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <h4 class="font-bold text-gray-900 mb-2">Running Your Server</h4>
+                    <p class="text-gray-700">
+                        Start the server: <code class="bg-gray-200 rounded px-2 py-1">node server.js</code><br>
+                        Visit: <code class="bg-gray-200 rounded px-2 py-1">http://localhost:9000</code><br>
+                        Stop the server: Press <code class="bg-gray-200 rounded px-2 py-1">Ctrl + C</code>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Section -->
+        <div class="bg-[#93005a] text-white rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Challenge</h2>
+            <div class="space-y-4">
+                <p class="text-lg opacity-90">
+                    Write a paragraph about what Express is and explain how it is used in modern web application development.
+                    Consider including:
+                </p>
+                <ul class="list-disc list-inside space-y-2 opacity-90">
+                    <li>What problem Express solves</li>
+                    <li>Its relationship with Node.js</li>
+                    <li>Key features that make it popular</li>
+                    <li>Real-world use cases</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-1-explain-how-routing-works-in-an-express-application.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="objective-2-read-data-from-the-query-string-request-body-and-route-parameters.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Objective →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

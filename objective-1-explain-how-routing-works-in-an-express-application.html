@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Objective 1 - Explain How Routing Works In an Express Application</title>
+    <meta name="identifier" content="g28679408a3cbdadeada8b4a2a78e153c"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Express Routing</h1>
+            <p class="text-xl text-gray-700">Understanding How Routing Works in Express Applications</p>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">What is Express Routing?</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p class="text-lg">
+                    Routing refers to how an application's endpoints (URIs) respond to client requests. 
+                    Express provides a robust routing system that allows you to:
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li>Handle different HTTP methods (GET, POST, PUT, DELETE)</li>
+                    <li>Process requests at specific URLs</li>
+                    <li>Send appropriate responses back to clients</li>
+                    <li>Organize code based on routes and HTTP methods</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- HTTP Methods Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <!-- GET and POST -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <h3 class="text-xl font-bold text-[#00808c] mb-4">Basic HTTP Methods</h3>
+                <div class="space-y-6">
+                    <div class="border-l-4 border-green-500 pl-4">
+                        <h4 class="font-bold text-gray-900 mb-2">GET</h4>
+                        <p class="text-gray-700 text-sm">Retrieve data from the server</p>
+                        <div class="bg-gray-900 rounded mt-2 p-3">
+                            <code class="text-gray-100 text-xs">server.get('/about', (req, res) => {
+    res.status(200).send('<h1>About Us</h1>');
+});</code>
+                        </div>
+                    </div>
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <h4 class="font-bold text-gray-900 mb-2">POST</h4>
+                        <p class="text-gray-700 text-sm">Create new data on the server</p>
+                        <div class="bg-gray-900 rounded mt-2 p-3">
+                            <code class="text-gray-100 text-xs">server.post('/hobbits', (req, res) => {
+    res.status(201).json({ url: '/hobbits', operation: 'POST' });
+});</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUT and DELETE -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <h3 class="text-xl font-bold text-[#93005a] mb-4">Advanced HTTP Methods</h3>
+                <div class="space-y-6">
+                    <div class="border-l-4 border-yellow-500 pl-4">
+                        <h4 class="font-bold text-gray-900 mb-2">PUT</h4>
+                        <p class="text-gray-700 text-sm">Update existing data on the server</p>
+                        <div class="bg-gray-900 rounded mt-2 p-3">
+                            <code class="text-gray-100 text-xs">server.put('/hobbits', (req, res) => {
+    res.status(200).json({ url: '/hobbits', operation: 'PUT' });
+});</code>
+                        </div>
+                    </div>
+                    <div class="border-l-4 border-red-500 pl-4">
+                        <h4 class="font-bold text-gray-900 mb-2">DELETE</h4>
+                        <p class="text-gray-700 text-sm">Remove data from the server</p>
+                        <div class="bg-gray-900 rounded mt-2 p-3">
+                            <code class="text-gray-100 text-xs">server.delete('/hobbits', (req, res) => {
+    res.status(204).send();
+});</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HTTP Status Codes -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Common HTTP Status Codes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-bold text-green-800">200 OK</h4>
+                    <p class="text-sm text-green-700">Successful GET/PUT requests</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-bold text-blue-800">201 Created</h4>
+                    <p class="text-sm text-blue-700">Successful POST requests</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-bold text-gray-800">204 No Content</h4>
+                    <p class="text-sm text-gray-700">Successful DELETE requests</p>
+                </div>
+                <div class="bg-red-50 p-4 rounded-lg">
+                    <h4 class="font-bold text-red-800">404 Not Found</h4>
+                    <p class="text-sm text-red-700">Resource not found</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Follow Along Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Follow Along: Building a Complete API</h2>
+            <div class="space-y-6">
+                <p class="text-gray-700">
+                    Let's create a complete set of CRUD endpoints for a hobbits resource. Each endpoint will handle 
+                    different HTTP methods on the same URL.
+                </p>
+
+                <div class="bg-gray-900 rounded-lg p-6 overflow-x-auto">
+                    <pre class="text-gray-100 text-sm"><code>// GET request handler
+server.get('/hobbits', (req, res) => {
+    res.status(200).json({ url: '/hobbits', operation: 'GET' });
+});
+
+// POST request handler
+server.post('/hobbits', (req, res) => {
+    res.status(201).json({ url: '/hobbits', operation: 'POST' });
+});
+
+// PUT request handler
+server.put('/hobbits', (req, res) => {
+    res.status(200).json({ url: '/hobbits', operation: 'PUT' });
+});
+
+// DELETE request handler
+server.delete('/hobbits', (req, res) => {
+    res.status(204).send();
+});</code></pre>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <h4 class="font-bold text-gray-900 mb-2">Important Notes</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Each HTTP method can use the same URL but will trigger different handlers</li>
+                        <li>Different status codes are used for different operations</li>
+                        <li>Response format can be HTML or JSON depending on your needs</li>
+                        <li>Later, we'll learn to handle request data using tools like Postman</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testing Your Routes -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Testing Your Routes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Browser Testing (GET only)</h3>
+                    <p class="text-gray-700">
+                        Navigate to <code class="bg-gray-100 rounded px-2 py-1">/about</code> and 
+                        <code class="bg-gray-100 rounded px-2 py-1">/contact</code> in your browser to test GET routes.
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Postman Testing (All Methods)</h3>
+                    <p class="text-gray-700">
+                        Use Postman to test POST, PUT, and DELETE routes. We'll learn more about this in upcoming lessons.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Section -->
+        <div class="bg-[#93005a] text-white rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Challenge</h2>
+            <div class="space-y-4">
+                <p class="text-lg opacity-90">
+                    Create a complete set of CRUD endpoints for the <code class="bg-white/20 rounded px-2 py-1">/users</code> route:
+                </p>
+                <ul class="list-disc list-inside space-y-2 opacity-90">
+                    <li>Implement GET, POST, PUT, and DELETE methods</li>
+                    <li>Return appropriate status codes for each operation</li>
+                    <li>Send JSON responses similar to the hobbits example</li>
+                    <li>Test your endpoints using Postman</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-1-explain-what-middleware-is-and-the-different-types.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="objective-2-explain-what-express-is-and-its-core-features.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Objective →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

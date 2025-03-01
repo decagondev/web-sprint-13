@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objective 1 - Extract Configuration Into Environment Variables</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Environment Variables in Node.js</h1>
+            <p class="text-xl text-gray-700">Learn how to manage configuration across different environments</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Introduction Video</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Node Environment Variables Video" 
+                    src="https://fast.wistia.net/embed/iframe/yem91fxf1l" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Understanding Environments</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                    <p class="text-blue-800">
+                        Environment variables are a fundamental concept in modern application development. They allow you to 
+                        manage configuration that changes between different environments without modifying your code.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Development</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Local machine</li>
+                            <li>Quick iterations</li>
+                            <li>Debug friendly</li>
+                            <li>Mock services</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Testing/Staging</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Production-like</li>
+                            <li>Integration tests</li>
+                            <li>Performance testing</li>
+                            <li>Regression checks</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Production</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Live environment</li>
+                            <li>Real user traffic</li>
+                            <li>Optimized settings</li>
+                            <li>High availability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Project Setup</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
+                    <p class="text-blue-800">
+                        Start with the <a href="https://github.com/BloomInstituteOfTechnology/node-api4-guided" 
+                        class="underline hover:text-blue-600">starter code repository</a>. We'll configure it to use 
+                        environment variables for flexible deployment.
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-xl font-semibold text-gray-800">1. Configure Start Script</h3>
+                    <div class="bg-gray-900 rounded-lg p-6">
+                        <p class="text-gray-300 mb-2">package.json:</p>
+                        <pre class="text-gray-100 text-sm"><code>{
+    "scripts": {
+        "start": "node index.js",  // For production
+        "server": "nodemon index.js"  // For development
+    }
+}</code></pre>
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-gray-800">2. Install Dependencies</h3>
+                    <div class="bg-gray-900 rounded-lg p-6">
+                        <pre class="text-gray-100 text-sm"><code>npm install dotenv</code></pre>
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-gray-800">3. Configure Environment</h3>
+                    <div class="bg-gray-900 rounded-lg p-6">
+                        <p class="text-gray-300 mb-2">.env file:</p>
+                        <pre class="text-gray-100 text-sm"><code>PORT=9001
+DB_CONNECTION="postgresql://localhost:5432/mydb"
+API_KEY="your-secret-key"</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Implementation</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <p class="text-gray-300 mb-2">index.js:</p>
+                    <pre class="text-gray-100 text-sm"><code>// Load environment variables early
+require('dotenv').config();
+
+// Server code...
+const express = require('express');
+const server = express();
+
+// Use environment variables
+const port = process.env.PORT || 9000;
+const dbConnection = process.env.DB_CONNECTION;
+const apiKey = process.env.API_KEY;
+
+server.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});</code></pre>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Best Practices</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Never commit .env files</li>
+                            <li>Use .env.example for documentation</li>
+                            <li>Load variables early in app lifecycle</li>
+                            <li>Always provide fallback values</li>
+                            <li>Use meaningful variable names</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Common Use Cases</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>API keys and secrets</li>
+                            <li>Database connections</li>
+                            <li>Service endpoints</li>
+                            <li>Feature flags</li>
+                            <li>Application ports</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Security Considerations</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                    <p class="text-red-800">
+                        <strong>Warning:</strong> Never commit sensitive information to version control. Always use environment 
+                        variables for secrets and configure them securely in your deployment platform.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Do's</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Add .env to .gitignore</li>
+                            <li>Use encryption for sensitive data</li>
+                            <li>Rotate secrets regularly</li>
+                            <li>Limit access to production variables</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Don'ts</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Commit .env files</li>
+                            <li>Share production secrets</li>
+                            <li>Use same values across environments</li>
+                            <li>Store secrets in code</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Challenge</h2>
+            
+            <div class="space-y-6">
+                <p class="text-gray-700">Extract configuration into environment variables following these steps:</p>
+                
+                <ol class="list-decimal list-inside space-y-4 text-gray-700">
+                    <li class="p-4 bg-gray-50 rounded-lg">
+                        <strong>Identify Configuration</strong>
+                        <p class="mt-2 ml-6">Review your code and identify values that should be environment-specific</p>
+                    </li>
+                    <li class="p-4 bg-gray-50 rounded-lg">
+                        <strong>Create Environment Files</strong>
+                        <p class="mt-2 ml-6">
+                            Create .env and .env.example files with appropriate values
+                        </p>
+                    </li>
+                    <li class="p-4 bg-gray-50 rounded-lg">
+                        <strong>Update Code</strong>
+                        <p class="mt-2 ml-6">Modify your application to use process.env instead of hardcoded values</p>
+                    </li>
+                    <li class="p-4 bg-gray-50 rounded-lg">
+                        <strong>Test Different Environments</strong>
+                        <p class="mt-2 ml-6">Verify your application works with different environment configurations</p>
+                    </li>
+                </ol>
+
+                <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-6">
+                    <p class="text-green-700">
+                        <strong>Tip:</strong> Start with non-sensitive configuration first, like ports and feature flags. 
+                        Once comfortable, move on to sensitive data like API keys and database credentials.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-2-deploy-a-web-api-to-heroku.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="module-4-guided-project.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Objective →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objective 2 - Deploy a Web-API to Heroku</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Deploying Web APIs to Heroku</h1>
+            <p class="text-xl text-gray-700">Learn how to deploy and manage Express APIs on Heroku's platform</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Introduction Video</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Heroku Deployment Video" 
+                    src="https://fast.wistia.net/embed/iframe/n63bbv8ubc" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Overview</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+                    <p class="text-yellow-800">
+                        <strong>Important Note:</strong> As of November 2022, Heroku no longer provides a free tier. 
+                        We'll cover both Heroku and Render.com as deployment options. Render.com offers a generous free tier 
+                        and is an excellent alternative for personal projects.
+                    </p>
+                </div>
+
+                <p>
+                    In this lesson, you'll learn how to deploy an Express API to cloud platforms. We'll cover deployment 
+                    processes for both Heroku and Render.com, two popular platforms for hosting full-stack applications. 
+                    You'll learn everything from preparing your application for deployment to managing environment variables 
+                    in production.
+                </p>
+            </div>
+        </div>
+
+        <!-- Prerequisites Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Prerequisites</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Required Tools</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Git installed locally</li>
+                        <li>GitHub account</li>
+                        <li>Heroku account</li>
+                        <li>Node.js and npm</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Project Requirements</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Express.js API</li>
+                        <li>Proper start script</li>
+                        <li>Environment-based port</li>
+                        <li>Git repository</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Project Setup</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
+                    <p class="text-blue-800">
+                        We'll be using <a href="https://github.com/BloomInstituteOfTechnology/node-api4-guided-solution" 
+                        class="underline hover:text-blue-600">this repository</a> as our starting point. 
+                        It's already configured with the necessary deployment settings.
+                    </p>
+                </div>
+
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <p class="text-gray-300 mb-2">Required package.json configuration:</p>
+                    <pre class="text-gray-100 text-sm"><code>{
+    "scripts": {
+        "start": "node index.js",  // Not nodemon
+        "dev": "nodemon index.js"
+    }
+}</code></pre>
+                </div>
+
+                <div class="bg-gray-900 rounded-lg p-6 mt-4">
+                    <p class="text-gray-300 mb-2">Server configuration with environment-based port:</p>
+                    <pre class="text-gray-100 text-sm"><code>const port = process.env.PORT || 5000;
+
+server.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deployment Steps -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Deployment Process</h2>
+            
+            <!-- Tabs -->
+            <div class="mb-6">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex" aria-label="Tabs">
+                        <button onclick="switchTab('heroku')" 
+                                class="tab-button w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm border-[#93005a] text-[#93005a]" 
+                                id="heroku-tab">
+                            Heroku Deployment
+                        </button>
+                        <button onclick="switchTab('render')" 
+                                class="tab-button w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" 
+                                id="render-tab">
+                            Render.com Deployment
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Heroku Content -->
+            <div id="heroku-content" class="tab-content">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-semibold text-gray-800">Setting up Continuous Deployment on Heroku</h3>
+                    
+                    <ol class="list-decimal list-inside space-y-4 text-gray-700">
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>Create Heroku App</strong>
+                            <p class="mt-2 ml-6">Login to Heroku and create a new application</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>Connect to GitHub</strong>
+                            <p class="mt-2 ml-6">In the Deploy tab, choose GitHub as your deployment method</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>Select Repository</strong>
+                            <p class="mt-2 ml-6">Search for and connect your GitHub repository</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>Configure Automatic Deploys</strong>
+                            <p class="mt-2 ml-6">Enable automatic deploys from your main branch</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>Initial Deploy</strong>
+                            <p class="mt-2 ml-6">Manually deploy your branch to kick-start the process</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Render Content -->
+            <div id="render-content" class="tab-content hidden">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-semibold text-gray-800">Setting up Continuous Deployment on Render.com</h3>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
+                        <p class="text-blue-800">
+                            Render.com offers a more straightforward deployment process and includes a generous free tier 
+                            perfect for personal projects and learning.
+                        </p>
+                    </div>
+                    
+                    <ol class="list-decimal list-inside space-y-4 text-gray-700">
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>Create Render Account</strong>
+                            <p class="mt-2 ml-6">Sign up at render.com and connect your GitHub account</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>New Web Service</strong>
+                            <p class="mt-2 ml-6">Click "New +" and select "Web Service"</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>Connect Repository</strong>
+                            <p class="mt-2 ml-6">Choose your repository from the list of available repositories</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>Configure Service</strong>
+                            <p class="mt-2 ml-6">
+                                Set the following:
+                                <ul class="list-disc list-inside ml-4 mt-2">
+                                    <li>Name: your-app-name</li>
+                                    <li>Environment: Node</li>
+                                    <li>Build Command: npm install</li>
+                                    <li>Start Command: npm start</li>
+                                </ul>
+                            </p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-lg">
+                            <strong>Create Web Service</strong>
+                            <p class="mt-2 ml-6">Click "Create Web Service" to start the deployment</p>
+                        </li>
+                    </ol>
+
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg mt-6">
+                        <p class="text-green-800">
+                            <strong>Tip:</strong> Render automatically detects changes in your repository and deploys them. 
+                            No need to set up webhooks or additional configuration!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Environment Variables -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Managing Environment Variables</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                    <p class="text-green-800">
+                        Environment variables are crucial for managing configuration and secrets across different environments.
+                        Never commit sensitive information to your repository!
+                    </p>
+                </div>
+
+                <!-- Tabs -->
+                <div class="mb-6">
+                    <div class="border-b border-gray-200">
+                        <nav class="-mb-px flex" aria-label="Tabs">
+                            <button onclick="switchEnvTab('heroku-env')" 
+                                    class="env-tab-button w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm border-[#93005a] text-[#93005a]" 
+                                    id="heroku-env-tab">
+                                Heroku Environment Setup
+                            </button>
+                            <button onclick="switchEnvTab('render-env')" 
+                                    class="env-tab-button w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" 
+                                    id="render-env-tab">
+                                Render.com Environment Setup
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Heroku Environment Content -->
+                <div id="heroku-env-content" class="env-tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Local Development</h3>
+                            <div class="bg-gray-900 rounded-lg p-4 mt-4">
+                                <p class="text-gray-300 mb-2">.env file:</p>
+                                <pre class="text-gray-100 text-sm"><code>FRIEND="Jess"
+PORT=5000
+DATABASE_URL="postgresql://..."</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Heroku Config Vars</h3>
+                            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li>Go to Settings tab in Heroku dashboard</li>
+                                <li>Click "Reveal Config Vars"</li>
+                                <li>Add key-value pairs for each variable</li>
+                                <li>Variables are automatically available to your app</li>
+                            </ol>
+                            <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                <p class="text-blue-800 text-sm">
+                                    Heroku automatically sets PORT and DATABASE_URL variables for your application.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Render Environment Content -->
+                <div id="render-env-content" class="env-tab-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Local Development</h3>
+                            <div class="bg-gray-900 rounded-lg p-4 mt-4">
+                                <p class="text-gray-300 mb-2">.env file:</p>
+                                <pre class="text-gray-100 text-sm"><code>PORT=5000
+DATABASE_URL="postgresql://..."
+API_KEY="your-secret-key"</code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Render.com Environment</h3>
+                            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                                <li>Navigate to your Web Service dashboard</li>
+                                <li>Click on "Environment" tab</li>
+                                <li>Add environment variables under "Environment Variables"</li>
+                                <li>Click "Save Changes" to apply</li>
+                            </ol>
+                            <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                <p class="text-blue-800 text-sm">
+                                    Render automatically sets PORT, RENDER_EXTERNAL_URL, and other service-specific variables.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+                        <p class="text-yellow-800">
+                            <strong>Note:</strong> Environment changes in Render.com trigger a new deployment to ensure your application
+                            picks up the new variables.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4" id="challenge">Challenge</h2>
+            
+            <!-- Challenge Tabs -->
+            <div class="mb-6">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex" aria-label="Tabs">
+                        <button onclick="switchChallengeTab('heroku-challenge')" 
+                                class="challenge-tab-button w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm border-[#93005a] text-[#93005a]" 
+                                id="heroku-challenge-tab">
+                            Heroku Challenge
+                        </button>
+                        <button onclick="switchChallengeTab('render-challenge')" 
+                                class="challenge-tab-button w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" 
+                                id="render-challenge-tab">
+                            Render.com Challenge
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Heroku Challenge Content -->
+            <div id="heroku-challenge-content" class="challenge-tab-content">
+                <div class="space-y-4">
+                    <p class="text-gray-600">Deploy one of your existing Express APIs to Heroku following these steps:</p>
+                    
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Ensure your API uses environment variables for configuration</li>
+                        <li>Set up proper start scripts in package.json</li>
+                        <li>Create a new Heroku application</li>
+                        <li>Configure continuous deployment from GitHub</li>
+                        <li>Set up necessary environment variables in Heroku Config Vars</li>
+                        <li>Test your deployed API using Postman</li>
+                    </ol>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-4">
+                        <p class="text-blue-700">
+                            <strong>Note:</strong> Remember that Heroku requires a credit card for account verification, 
+                            even if you're using their basic tier.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Render Challenge Content -->
+            <div id="render-challenge-content" class="challenge-tab-content hidden">
+                <div class="space-y-4">
+                    <p class="text-gray-600">Deploy one of your existing Express APIs to Render.com following these steps:</p>
+                    
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Ensure your API uses environment variables for configuration</li>
+                        <li>Set up proper start scripts in package.json</li>
+                        <li>Create a free Render.com account</li>
+                        <li>Create a new Web Service and connect your GitHub repository</li>
+                        <li>Configure your build and start commands</li>
+                        <li>Set up environment variables in Render's dashboard</li>
+                        <li>Test your deployed API using Postman</li>
+                    </ol>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-4">
+                        <p class="text-blue-700">
+                            <strong>Bonus:</strong> Set up a PostgreSQL database using Render's managed database service 
+                            and connect it to your API.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 mt-6">
+                <p class="text-green-700">
+                    <strong>Tip:</strong> Remember to test your API thoroughly after deployment to ensure 
+                    all endpoints work as expected in the production environment. Pay special attention to 
+                    environment variables and database connections.
+                </p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-4-use-postman-to-manually-test-web-apis.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="objective-1-extract-configuration-into-environment-variables.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Objective →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected content
+            document.getElementById(`${tabName}-content`).classList.remove('hidden');
+            
+            // Reset all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('border-[#93005a]', 'text-[#93005a]');
+                button.classList.add('border-transparent', 'text-gray-500');
+            });
+            
+            // Highlight selected tab
+            document.getElementById(`${tabName}-tab`).classList.remove('border-transparent', 'text-gray-500');
+            document.getElementById(`${tabName}-tab`).classList.add('border-[#93005a]', 'text-[#93005a]');
+        }
+
+        function switchEnvTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.env-tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected content
+            document.getElementById(`${tabName}-content`).classList.remove('hidden');
+            
+            // Reset all tab buttons
+            document.querySelectorAll('.env-tab-button').forEach(button => {
+                button.classList.remove('border-[#93005a]', 'text-[#93005a]');
+                button.classList.add('border-transparent', 'text-gray-500');
+            });
+            
+            // Highlight selected tab
+            document.getElementById(`${tabName}-tab`).classList.remove('border-transparent', 'text-gray-500');
+            document.getElementById(`${tabName}-tab`).classList.add('border-[#93005a]', 'text-[#93005a]');
+        }
+
+        function switchChallengeTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.challenge-tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected content
+            document.getElementById(`${tabName}-content`).classList.remove('hidden');
+            
+            // Reset all tab buttons
+            document.querySelectorAll('.challenge-tab-button').forEach(button => {
+                button.classList.remove('border-[#93005a]', 'text-[#93005a]');
+                button.classList.add('border-transparent', 'text-gray-500');
+            });
+            
+            // Highlight selected tab
+            document.getElementById(`${tabName}-tab`).classList.remove('border-transparent', 'text-gray-500');
+            document.getElementById(`${tabName}-tab`).classList.add('border-[#93005a]', 'text-[#93005a]');
+        }
+    </script>
+</body>
+</html>

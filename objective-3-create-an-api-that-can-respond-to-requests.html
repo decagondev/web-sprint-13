@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objective 3 - Create an API That Can Respond to Requests</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Creating APIs with Express</h1>
+            <p class="text-xl text-gray-700">Building Your First Web API</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Introduction Video</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Node and Express Video" 
+                    src="https://fast.wistia.net/embed/iframe/xld7g7jflu" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Building Your First API</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                    <p class="text-blue-800">
+                        We'll create a simple Web API that responds to HTTP requests. This will serve as your foundation 
+                        for building more complex APIs in the future.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Setup Steps</h3>
+                    <ol class="list-decimal list-inside space-y-3">
+                        <li class="text-gray-700">Clone the <a href="https://github.com/lambdaschool/node-express-mini" class="text-blue-600 hover:text-blue-800">node-express-mini repository</a></li>
+                        <li class="text-gray-700">Navigate to the project folder using <code class="bg-gray-100 rounded px-2 py-1">cd</code></li>
+                        <li class="text-gray-700">Install dependencies with <code class="bg-gray-100 rounded px-2 py-1">npm install</code></li>
+                        <li class="text-gray-700">Create <code class="bg-gray-100 rounded px-2 py-1">index.js</code> in the root directory</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Basic Server Setup -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Basic Server Setup</h2>
+            <div class="space-y-6">
+                <div class="bg-gray-900 rounded-lg p-6 overflow-x-auto">
+                    <pre class="text-gray-100 text-sm"><code>const express = require('express');
+const server = express();
+
+server.get('/', (req, res) => {
+    res.send('Hello World');
+});
+
+server.listen(8000, () => {
+    console.log('API running on port 8000');
+});</code></pre>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Key Concepts</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Express application instance</li>
+                            <li>Route handlers</li>
+                            <li>Request/Response objects</li>
+                            <li>Server listening</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Important Notes</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Server runs until stopped</li>
+                            <li>Handles all incoming requests</li>
+                            <li>Routes define behavior</li>
+                            <li>Port must be available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JSON Response Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Working with JSON Responses</h2>
+            <div class="space-y-6">
+                <p class="text-gray-700">
+                    Modern APIs typically respond with JSON data. Let's create an endpoint that returns a list of hobbits:
+                </p>
+
+                <div class="bg-gray-900 rounded-lg p-6 overflow-x-auto">
+                    <pre class="text-gray-100 text-sm"><code>server.get('/hobbits', (req, res) => {
+    const hobbits = [
+        { id: 1, name: 'Samwise Gamgee' },
+        { id: 2, name: 'Frodo Baggins' },
+    ];
+    res.status(200).json(hobbits);
+});</code></pre>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">HTTP Status Codes</h4>
+                    <p class="text-yellow-700">
+                        Always send appropriate status codes with your responses:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 text-yellow-700">
+                        <li>200: OK (successful GET/PUT)</li>
+                        <li>201: Created (successful POST)</li>
+                        <li>204: No Content (successful DELETE)</li>
+                        <li>400: Bad Request</li>
+                        <li>404: Not Found</li>
+                        <li>500: Server Error</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete CRUD API -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Building a Complete CRUD API</h2>
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-green-800 mb-3">GET (Read)</h3>
+                        <div class="bg-gray-900 rounded p-4">
+                            <code class="text-xs text-white">server.get('/hobbits', (req, res) => {
+    res.status(200).json(hobbits);
+});</code>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-3">POST (Create)</h3>
+                        <div class="bg-gray-900 rounded p-4">
+                            <code class="text-xs text-white">server.post('/hobbits', (req, res) => {
+    const newHobbit = { id: getId(), ...req.body };
+    hobbits.push(newHobbit);
+    res.status(201).json(hobbits);
+});</code>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-yellow-800 mb-3">PUT (Update)</h3>
+                        <div class="bg-gray-900 rounded p-4">
+                            <code class="text-xs text-white">server.put('/hobbits/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+    // Update logic here
+    res.status(200).json(hobbits);
+});</code>
+                        </div>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-red-800 mb-3">DELETE (Remove)</h3>
+                        <div class="bg-gray-900 rounded p-4">
+                            <code class="text-xs text-white">server.delete('/hobbits/:id', (req, res) => {
+    const { id } = req.params;
+    // Delete logic here
+    res.status(204).end();
+});</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">API Best Practices</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Error Handling</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Use try-catch blocks</li>
+                        <li>Send proper status codes</li>
+                        <li>Include error messages</li>
+                        <li>Log errors server-side</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Security</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Validate input data</li>
+                        <li>Sanitize responses</li>
+                        <li>Use HTTPS</li>
+                        <li>Implement rate limiting</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Performance</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Implement caching</li>
+                        <li>Compress responses</li>
+                        <li>Optimize queries</li>
+                        <li>Use async/await</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Section -->
+        <div class="bg-[#93005a] text-white rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Challenge</h2>
+            <div class="space-y-4">
+                <p class="text-lg opacity-90">
+                    Create a <code class="bg-white/20 rounded px-2 py-1">/users</code> endpoint that:
+                </p>
+                <ul class="list-disc list-inside space-y-2 opacity-90">
+                    <li>Connects to the database in <code class="bg-white/20 rounded px-2 py-1">/data/db.js</code></li>
+                    <li>Uses the <code class="bg-white/20 rounded px-2 py-1">.find()</code> method to get users</li>
+                    <li>Handles promises correctly</li>
+                    <li>Implements proper error handling</li>
+                </ul>
+                <div class="bg-white/10 rounded-lg p-4 mt-4">
+                    <p class="text-sm">
+                        Remember: Production APIs should always fetch data from a persistent data store, 
+                        not from in-memory arrays.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-3-write-error-handling-middleware.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="objective-4-use-postman-to-manually-test-web-apis.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Objective →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

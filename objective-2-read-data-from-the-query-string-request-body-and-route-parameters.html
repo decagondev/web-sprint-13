@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Objective 2 - Read Data From the Query String, Request Body, and Route Parameters</title>
+    <meta name="identifier" content="g8b9e5537674c3c61a7d66b731e0bbe41"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Reading Data from Requests in Express</h1>
+            <p class="text-xl text-gray-700">Understanding Query Strings, Request Body, and Route Parameters</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Introduction Video</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Reading Data From Requests Video" 
+                    src="https://fast.wistia.net/embed/iframe/t8pn2didy8" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Overview Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#00808c]">
+                <h3 class="font-bold text-xl mb-4">Route Parameters</h3>
+                <p class="text-gray-600">Dynamic segments in URLs that capture values from the request path.</p>
+                <div class="mt-4 text-sm bg-gray-50 p-3 rounded">
+                    <code class="text-[#00808c]">/users/:id</code>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#93005a]">
+                <h3 class="font-bold text-xl mb-4">Query String</h3>
+                <p class="text-gray-600">Key-value pairs appended to the URL after a question mark.</p>
+                <div class="mt-4 text-sm bg-gray-50 p-3 rounded">
+                    <code class="text-[#93005a]">?sort=name&order=desc</code>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border-t-4 border-[#00808c]">
+                <h3 class="font-bold text-xl mb-4">Request Body</h3>
+                <p class="text-gray-600">Data sent in the request payload, typically for POST/PUT requests.</p>
+                <div class="mt-4 text-sm bg-gray-50 p-3 rounded">
+                    <code class="text-[#00808c]">req.body.data</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Route Parameters Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Route Parameters</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p>Route parameters are dynamic segments in the URL pattern that capture values from the actual request URL. They are prefixed with a colon (<code>:</code>) in the route definition.</p>
+                
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-[#00808c]">
+                    <h4 class="font-semibold mb-2">Key Points:</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Values are accessed via <code>req.params</code></li>
+                        <li>Parameters are always strings</li>
+                        <li>Multiple parameters are supported</li>
+                        <li>Common for RESTful resource identification</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-900 rounded-lg p-6 mt-4">
+                    <pre class="text-gray-100 text-sm overflow-x-auto"><code>// Route Definition
+app.get('/users/:id/posts/:postId', (req, res) => {
+    const userId = req.params.id;
+    const postId = req.params.postId;
+    // Access both parameters
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Query String Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Query String Parameters</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p>Query strings provide a way to pass data to the server through the URL. They start with a question mark (<code>?</code>) and consist of key-value pairs.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-semibold mb-3">Common Use Cases:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li>Pagination (<code>?page=2&limit=10</code>)</li>
+                            <li>Filtering (<code>?category=books</code>)</li>
+                            <li>Sorting (<code>?sort=price&order=desc</code>)</li>
+                            <li>Search (<code>?q=search+term</code>)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-semibold mb-3">Important Notes:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li>Access via <code>req.query</code></li>
+                            <li>Case-sensitive parameter names</li>
+                            <li>Arrays possible with repeated keys</li>
+                            <li>Values are strings by default</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <pre class="text-gray-100 text-sm overflow-x-auto"><code>// Handling query parameters
+app.get('/api/products', (req, res) => {
+    const { sort, order, page = 1, limit = 10 } = req.query;
+    // Use the parameters for filtering/sorting
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Request Body Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Request Body</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p>The request body is used to send data to the server, typically in POST, PUT, or PATCH requests. Express needs middleware to parse the body data.</p>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
+                    <p class="text-blue-800 font-semibold">Important Setup</p>
+                    <p class="text-blue-700 text-sm mt-2">Don't forget to add the body-parser middleware:</p>
+                    <code class="text-sm bg-blue-100 px-2 py-1 rounded mt-2">app.use(express.json());</code>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                    <div class="bg-gray-900 rounded-lg p-6">
+                        <h4 class="text-white font-semibold mb-3">Request Example:</h4>
+                        <pre class="text-gray-100 text-sm overflow-x-auto"><code>POST /api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "age": 30
+}</code></pre>
+                    </div>
+                    <div class="bg-gray-900 rounded-lg p-6">
+                        <h4 class="text-white font-semibold mb-3">Handler Example:</h4>
+                        <pre class="text-gray-100 text-sm overflow-x-auto"><code>app.post('/api/users', (req, res) => {
+  const { name, email, age } = req.body;
+  // Create new user
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Follow Along Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Follow Along: Complete Example</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p class="mb-4">Let's create a complete example that uses all three methods of reading request data:</p>
+                
+                <div class="bg-gray-900 rounded-lg p-6 overflow-x-auto">
+                    <pre class="text-gray-100 text-sm"><code>const express = require('express');
+const app = express();
+
+// Middleware for parsing JSON bodies
+app.use(express.json());
+
+// GET users with query parameters for filtering and sorting
+app.get('/api/users', (req, res) => {
+    const { sort, order, page = 1, limit = 10 } = req.query;
+    // Use parameters to filter and sort users
+});
+
+// GET specific user by ID (route parameter)
+app.get('/api/users/:id', (req, res) => {
+    const userId = req.params.id;
+    // Find user by ID
+});
+
+// POST new user (request body)
+app.post('/api/users', (req, res) => {
+    const { name, email, age } = req.body;
+    // Create new user with data
+});
+
+// PUT update user (combination of route param and body)
+app.put('/api/users/:id', (req, res) => {
+    const userId = req.params.id;
+    const updates = req.body;
+    // Update user using both pieces of data
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Section -->
+        <div class="bg-[#93005a] text-white rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-6">Challenge</h2>
+            <div class="space-y-4">
+                <p class="text-lg opacity-90">
+                    Using the provided database helper functions in <code class="bg-white/20 px-2 py-1 rounded">/data/db.js</code>,
+                    implement the following:
+                </p>
+                <ul class="list-disc list-inside space-y-3 opacity-90">
+                    <li>Create a GET endpoint that accepts an ID as a route parameter</li>
+                    <li>Implement full CRUD operations for users</li>
+                    <li>Add sorting and pagination support to GET endpoints</li>
+                    <li>Handle appropriate error cases with correct HTTP status codes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-2-explain-what-express-is-and-its-core-features.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="objective-3-explain-the-basics-of-the-rest-architectural-style.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Objective →
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Objective 3 - Explain the Basics of the REST Architectural Style</title>
+    <meta name="identifier" content="g0fbf5f67657501078570ef8559f60eb4"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">REST Architectural Style</h1>
+            <p class="text-xl text-gray-700">Understanding the Fundamentals of RESTful APIs</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Introduction Video</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Representational State Transfer Video" 
+                    src="https://fast.wistia.net/embed/iframe/ir5uxbvvso" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">What is REST?</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p class="text-lg">
+                    REST (Representational State Transfer) is an architectural style that defines a set of constraints and principles 
+                    for creating web services. These are <strong>recommendations</strong>, not strict standards, designed to create 
+                    scalable, maintainable, and flexible APIs.
+                </p>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg my-6">
+                    <h3 class="font-semibold text-blue-800 mb-2">Core Principles</h3>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            <span><strong>Resources:</strong> Everything is treated as a resource</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            <span><strong>URIs:</strong> Each resource has a unique identifier</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            <span><strong>Representations:</strong> Resources can have multiple formats</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            <span><strong>Stateless:</strong> No client context stored on server</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            <span><strong>HTTP Methods:</strong> Standard operations for resource management</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- REST Constraints Grid -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">The Six Constraints of REST</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Client-Server -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-[#93005a] mb-3">1. Client-Server</h3>
+                    <p class="text-gray-700">Separation of concerns between UI/client and data storage/server. This allows:</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600">
+                        <li>Independent evolution of components</li>
+                        <li>Better scalability</li>
+                        <li>Improved portability</li>
+                    </ul>
+                </div>
+
+                <!-- Stateless -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-[#93005a] mb-3">2. Stateless</h3>
+                    <p class="text-gray-700">Each request contains all information needed to complete it:</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600">
+                        <li>No session dependency</li>
+                        <li>Better reliability</li>
+                        <li>Easier scaling</li>
+                    </ul>
+                </div>
+
+                <!-- Cacheable -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-[#93005a] mb-3">3. Cacheable</h3>
+                    <p class="text-gray-700">Responses must define themselves as cacheable or not:</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600">
+                        <li>Improved performance</li>
+                        <li>Better scalability</li>
+                        <li>GET, PUT, DELETE are idempotent</li>
+                    </ul>
+                </div>
+
+                <!-- Layered System -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-[#93005a] mb-3">4. Layered System</h3>
+                    <p class="text-gray-700">Client can't tell if connected directly to server:</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600">
+                        <li>Load balancing</li>
+                        <li>Shared caches</li>
+                        <li>Security layers</li>
+                    </ul>
+                </div>
+
+                <!-- Code on Demand -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-[#93005a] mb-3">5. Code on Demand (Optional)</h3>
+                    <p class="text-gray-700">Server can extend client functionality:</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600">
+                        <li>JavaScript execution</li>
+                        <li>Dynamic client updates</li>
+                        <li>Flexible implementation</li>
+                    </ul>
+                </div>
+
+                <!-- Uniform Interface -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-bold text-[#93005a] mb-3">6. Uniform Interface</h3>
+                    <p class="text-gray-700">Standardized resource interaction:</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600">
+                        <li>Resource identification in requests</li>
+                        <li>Resource manipulation through representations</li>
+                        <li>Self-descriptive messages</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- HATEOAS Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">HATEOAS</h2>
+            <div class="prose max-w-none text-gray-700">
+                <p class="mb-4">
+                    <strong>HATEOAS</strong> (Hypermedia As The Engine Of Application State) is a constraint that makes 
+                    REST APIs self-discoverable. Like a "choose your own adventure" book, clients interact with the API 
+                    dynamically through hypermedia links provided by the server.
+                </p>
+
+                <div class="bg-gray-900 rounded-lg p-6 my-4">
+                    <pre class="text-gray-100 text-sm overflow-x-auto"><code>{
+  "id": 1,
+  "name": "John Doe",
+  "_links": {
+    "self": { "href": "/users/1" },
+    "profile": { "href": "/users/1/profile" },
+    "orders": { "href": "/users/1/orders" }
+  }
+}</code></pre>
+                </div>
+
+                <p class="mt-4">
+                    In this example, the API response includes links to related resources, allowing the client to 
+                    discover and navigate the API dynamically.
+                </p>
+            </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">RESTful Best Practices</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold">Resource Naming</h3>
+                    <ul class="list-disc list-inside text-gray-700">
+                        <li>Use nouns for resources</li>
+                        <li>Use plural forms for collections</li>
+                        <li>Use hierarchical relationships</li>
+                        <li>Keep URLs simple and readable</li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold">HTTP Methods</h3>
+                    <ul class="list-disc list-inside text-gray-700">
+                        <li>GET for reading</li>
+                        <li>POST for creating</li>
+                        <li>PUT/PATCH for updating</li>
+                        <li>DELETE for removing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Section -->
+        <div class="bg-[#93005a] text-white rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-6">Challenge</h2>
+            <div class="space-y-4">
+                <p class="text-lg opacity-90">
+                    Write a comprehensive explanation of REST in the context of web API design. Include:
+                </p>
+                <ul class="list-disc list-inside space-y-3 opacity-90">
+                    <li>The main principles of REST</li>
+                    <li>How REST constraints benefit API design</li>
+                    <li>Real-world examples of RESTful APIs</li>
+                    <li>Why HATEOAS is important</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-2-read-data-from-the-query-string-request-body-and-route-parameters.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="objective-3-write-error-handling-middleware.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Objective →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

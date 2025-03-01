@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Sprint 13 Study Guide</title>
+    <meta name="identifier" content="gd537f94312b1e7c6eba8edf6abfd4b57"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Sprint 13 Study Guide</h1>
+            <p class="text-xl text-gray-700">Node.js, Express, and Web API Development</p>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Quick Navigation</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="switchTab('nodejs')" 
+                        class="tab-button p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 border-l-4 border-[#93005a]">
+                    <h3 class="font-semibold text-gray-900">Node.js & Express</h3>
+                    <p class="text-sm text-gray-600">Core concepts and fundamentals</p>
+                </button>
+                <button onclick="switchTab('routing')"
+                        class="tab-button p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 border-l-4 border-[#00808c]">
+                    <h3 class="font-semibold text-gray-900">Server-Side Routing</h3>
+                    <p class="text-sm text-gray-600">Express routing patterns</p>
+                </button>
+                <button onclick="switchTab('middleware')"
+                        class="tab-button p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 border-l-4 border-[#93005a]">
+                    <h3 class="font-semibold text-gray-900">Middleware</h3>
+                    <p class="text-sm text-gray-600">Custom & built-in middleware</p>
+                </button>
+                <button onclick="switchTab('deployment')"
+                        class="tab-button p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 border-l-4 border-[#00808c]">
+                    <h3 class="font-semibold text-gray-900">Deployment</h3>
+                    <p class="text-sm text-gray-600">Best practices & platforms</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="space-y-8">
+            <!-- Node.js and Express Section -->
+            <div id="nodejs-content" class="tab-content active">
+                <div class="bg-white shadow-sm rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-[#93005a] mb-6">Node.js and Express Fundamentals</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <!-- Core Concepts -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-900">Core Concepts</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Event-driven architecture</li>
+                                <li>Non-blocking I/O operations</li>
+                                <li>CommonJS modules system</li>
+                                <li>npm package management</li>
+                                <li>Express application structure</li>
+                                <li>Request-response cycle</li>
+                            </ul>
+                        </div>
+
+                        <!-- Key Features -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-900">Key Features</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Single-threaded event loop</li>
+                                <li>Asynchronous programming</li>
+                                <li>Built-in modules (fs, http, path)</li>
+                                <li>Express middleware system</li>
+                                <li>Route handling</li>
+                                <li>Static file serving</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Code Examples -->
+                    <div class="space-y-4 mb-8">
+                        <h3 class="text-xl font-semibold text-gray-900">Common Code Patterns</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <p class="text-gray-400 text-sm mb-2">Basic Express Server</p>
+                                <pre class="text-gray-100 text-sm"><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});</code></pre>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <p class="text-gray-400 text-sm mb-2">Async Route Handler</p>
+                                <pre class="text-gray-100 text-sm"><code>app.get('/users', async (req, res) => {
+    try {
+        const users = await db.getUsers();
+        res.json(users);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resources -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-900">Essential Resources</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <a href="https://nodejs.org/en/docs/" target="_blank" 
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">Node.js Docs</h4>
+                                <p class="text-sm text-gray-600">Official documentation</p>
+                            </a>
+                            <a href="https://expressjs.com/" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">Express Docs</h4>
+                                <p class="text-sm text-gray-600">Express framework guide</p>
+                            </a>
+                            <a href="https://www.postman.com/" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">Postman</h4>
+                                <p class="text-sm text-gray-600">API testing tool</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Routing Section -->
+            <div id="routing-content" class="tab-content">
+                <div class="bg-white shadow-sm rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-[#00808c] mb-6">Server-Side Routing</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <!-- Route Types -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-900">Route Types</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Basic routes (GET, POST, etc.)</li>
+                                <li>Route parameters</li>
+                                <li>Query strings</li>
+                                <li>Nested routes</li>
+                                <li>Router middleware</li>
+                            </ul>
+                        </div>
+
+                        <!-- Best Practices -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-900">Best Practices</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Modular routing</li>
+                                <li>RESTful conventions</li>
+                                <li>Error handling</li>
+                                <li>Route validation</li>
+                                <li>Response formatting</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Code Examples -->
+                    <div class="space-y-4 mb-8">
+                        <h3 class="text-xl font-semibold text-gray-900">Routing Examples</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <p class="text-gray-400 text-sm mb-2">Express Router</p>
+                                <pre class="text-gray-100 text-sm"><code>const router = express.Router();
+
+router.get('/', (req, res) => {
+    res.json({ message: 'Users list' });
+});
+
+router.post('/', (req, res) => {
+    res.json({ message: 'Create user' });
+});
+
+module.exports = router;</code></pre>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <p class="text-gray-400 text-sm mb-2">Route Parameters</p>
+                                <pre class="text-gray-100 text-sm"><code>app.get('/users/:id', (req, res) => {
+    const { id } = req.params;
+    res.json({ message: `User ${id}` });
+});
+
+app.get('/posts', (req, res) => {
+    const { sort } = req.query;
+    res.json({ sort });
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resources -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-900">Routing Resources</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <a href="https://expressjs.com/en/guide/routing.html" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">Express Routing Guide</h4>
+                                <p class="text-sm text-gray-600">Official routing documentation</p>
+                            </a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">JavaScript Modules</h4>
+                                <p class="text-sm text-gray-600">Understanding modular design</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middleware Section -->
+            <div id="middleware-content" class="tab-content">
+                <div class="bg-white shadow-sm rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-[#93005a] mb-6">Express Middleware</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <!-- Types of Middleware -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-900">Types of Middleware</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Application-level middleware</li>
+                                <li>Router-level middleware</li>
+                                <li>Error-handling middleware</li>
+                                <li>Built-in middleware</li>
+                                <li>Third-party middleware</li>
+                            </ul>
+                        </div>
+
+                        <!-- Common Use Cases -->
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-900">Common Use Cases</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Authentication</li>
+                                <li>Request logging</li>
+                                <li>Data validation</li>
+                                <li>Error handling</li>
+                                <li>CORS configuration</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Code Examples -->
+                    <div class="space-y-4 mb-8">
+                        <h3 class="text-xl font-semibold text-gray-900">Middleware Examples</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <p class="text-gray-400 text-sm mb-2">Custom Middleware</p>
+                                <pre class="text-gray-100 text-sm"><code>const logger = (req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+};
+
+app.use(logger);
+
+const auth = (req, res, next) => {
+    if (!req.headers.authorization) {
+        res.status(401).json({ error: 'Unauthorized' });
+    }
+    next();
+};</code></pre>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <p class="text-gray-400 text-sm mb-2">Error Handling</p>
+                                <pre class="text-gray-100 text-sm"><code>app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({
+        error: 'Something broke!'
+    });
+});
+
+// Route with error handling
+app.get('/error', (req, res, next) => {
+    try {
+        throw new Error('Test error');
+    } catch (err) {
+        next(err);
+    }
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resources -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-900">Middleware Resources</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <a href="https://expressjs.com/en/guide/using-middleware.html" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">Using Middleware</h4>
+                                <p class="text-sm text-gray-600">Express middleware guide</p>
+                            </a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">HTTP Status Codes</h4>
+                                <p class="text-sm text-gray-600">Complete status code reference</p>
+                            </a>
+                            <a href="https://stackoverflow.com/questions/64044125/validate-forms-on-both-sides-or-only-in-the-server-side" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">Validation Patterns</h4>
+                                <p class="text-sm text-gray-600">Server-side validation guide</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deployment Section -->
+            <div id="deployment-content" class="tab-content">
+                <div class="bg-white shadow-sm rounded-lg p-8">
+                    <h2 class="text-2xl font-bold text-[#00808c] mb-6">Deployment and Best Practices</h2>
+                    
+                    <!-- Platform Comparison -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Deployment Platforms</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Heroku -->
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h4 class="font-semibold text-gray-900 mb-2">Heroku</h4>
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>Git-based deployment</li>
+                                    <li>Built-in CI/CD</li>
+                                    <li>Add-on marketplace</li>
+                                    <li>Command-line interface</li>
+                                    <li>Automatic SSL</li>
+                                </ul>
+                            </div>
+                            <!-- Render.com -->
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h4 class="font-semibold text-gray-900 mb-2">Render.com</h4>
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li>GitHub integration</li>
+                                    <li>Free tier available</li>
+                                    <li>Automatic HTTPS</li>
+                                    <li>Easy configuration</li>
+                                    <li>Built-in databases</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Best Practices -->
+                    <div class="space-y-4 mb-8">
+                        <h3 class="text-xl font-semibold text-gray-900">Deployment Best Practices</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <p class="text-gray-400 text-sm mb-2">Environment Variables</p>
+                                <pre class="text-gray-100 text-sm"><code>// .env
+PORT=3000
+DATABASE_URL=postgres://user:pass@host:5432/db
+
+// index.js
+require('dotenv').config();
+const port = process.env.PORT || 3000;
+const dbUrl = process.env.DATABASE_URL;</code></pre>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4">
+                                <p class="text-gray-400 text-sm mb-2">Production Configuration</p>
+                                <pre class="text-gray-100 text-sm"><code>if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 
+            'client', 'build', 'index.html'));
+    });
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resources -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-semibold text-gray-900">Deployment Resources</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <a href="https://devcenter.heroku.com/categories/reference" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">Heroku Documentation</h4>
+                                <p class="text-sm text-gray-600">Complete platform guide</p>
+                            </a>
+                            <a href="https://render.com/docs" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">Render.com Docs</h4>
+                                <p class="text-sm text-gray-600">Platform documentation</p>
+                            </a>
+                            <a href="https://en.wikipedia.org/wiki/Environment_variable" target="_blank"
+                               class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100">
+                                <h4 class="font-semibold text-gray-900">Environment Variables</h4>
+                                <p class="text-sm text-gray-600">Configuration best practices</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Resources -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mt-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Additional Resources</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="https://github.com/goldbergyoni/nodebestpractices" 
+                   target="_blank"
+                   class="block p-6 bg-gray-50 rounded-lg hover:bg-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Node.js Best Practices</h3>
+                    <p class="text-gray-700">Comprehensive guide to Node.js best practices</p>
+                </a>
+                <a href="https://expressjs.com/en/advanced/best-practice-security.html" 
+                   target="_blank"
+                   class="block p-6 bg-gray-50 rounded-lg hover:bg-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Express Security Best Practices</h3>
+                    <p class="text-gray-700">Security best practices for Express applications</p>
+                </a>
+                <a href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design" 
+                   target="_blank"
+                   class="block p-6 bg-gray-50 rounded-lg hover:bg-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">REST API Patterns</h3>
+                    <p class="text-gray-700">Best practices for RESTful API design and architecture</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-8">
+            <a href="module-4-project-solution-video.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Back to Solution Video
+            </a>
+            <a href="next-step.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Steps →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Update content visibility
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-content`).classList.add('active');
+
+            // Update button styles
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('bg-gray-100');
+            });
+            document.querySelector(`button[onclick="switchTab('${tabName}')"]`).classList.add('bg-gray-100');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Objective 1 - Explain What Middleware Is and the Different Types</title>
+    <meta name="identifier" content="ga2df6cdb164e76dcd28254fbbba57ade"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Understanding Express Middleware</h1>
+            <p class="text-xl text-gray-700">Objective 1: Types and Implementation</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Introduction Video</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Express Middleware Video" 
+                    src="https://fast.wistia.net/embed/iframe/67gj9hua12" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">What is Middleware?</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p class="text-lg">
+                    Middleware functions are the backbone of Express applications. They are functions that have access to the 
+                    request object (req), the response object (res), and the next middleware function in the application's 
+                    request-response cycle. These functions can:
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li>Execute any code</li>
+                    <li>Make changes to the request and response objects</li>
+                    <li>End the request-response cycle</li>
+                    <li>Call the next middleware in the stack</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Middleware Types Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <!-- Built-in Middleware -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-[#00808c] rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        1
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 ml-4">Built-in Middleware</h3>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-gray-700">
+                        Included with Express but requires explicit activation. Common examples include:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><code class="bg-gray-100 rounded px-2 py-1">express.json()</code></li>
+                        <li><code class="bg-gray-100 rounded px-2 py-1">express.urlencoded()</code></li>
+                        <li><code class="bg-gray-100 rounded px-2 py-1">express.static()</code></li>
+                    </ul>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-4">
+                        <p class="text-sm text-gray-700">
+                            Activation Example:<br>
+                            <code class="bg-gray-100 rounded px-2 py-1">server.use(express.json());</code>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third-party Middleware -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-[#93005a] rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        2
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 ml-4">Third-party Middleware</h3>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-gray-700">
+                        External npm modules that add functionality to Express applications:
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li>
+                            <a href="https://www.npmjs.com/package/morgan" class="text-blue-600 hover:text-blue-800 font-semibold">morgan</a>
+                            <span class="block text-sm">HTTP request logger middleware</span>
+                        </li>
+                        <li>
+                            <a href="https://www.npmjs.com/package/cors" class="text-blue-600 hover:text-blue-800 font-semibold">cors</a>
+                            <span class="block text-sm">Enable Cross-Origin Resource Sharing</span>
+                        </li>
+                        <li>
+                            <a href="https://www.npmjs.com/package/helmet" class="text-blue-600 hover:text-blue-800 font-semibold">helmet</a>
+                            <span class="block text-sm">Secure Express apps by setting HTTP headers</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Custom Middleware -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-[#00808c] rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        3
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 ml-4">Custom Middleware</h3>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-gray-700">
+                        Functions you write to perform specific tasks in your application:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Authentication</li>
+                        <li>Data validation</li>
+                        <li>Error handling</li>
+                        <li>Logging</li>
+                    </ul>
+                    <div class="bg-gray-50 rounded-lg p-4 mt-4">
+                        <p class="text-sm text-gray-600">
+                            We'll learn to write custom middleware in the next sections
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middleware Flow Diagram -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Understanding Middleware Flow</h2>
+            <div class="relative py-8">
+                <div class="flex justify-between items-center mb-8">
+                    <div class="w-1/4 text-center">
+                        <div class="bg-[#93005a] text-white rounded-lg p-4">
+                            Request
+                        </div>
+                    </div>
+                    <div class="w-1/4 text-center">
+                        <div class="bg-[#00808c] text-white rounded-lg p-4">
+                            Middleware 1
+                        </div>
+                    </div>
+                    <div class="w-1/4 text-center">
+                        <div class="bg-[#00808c] text-white rounded-lg p-4">
+                            Middleware 2
+                        </div>
+                    </div>
+                    <div class="w-1/4 text-center">
+                        <div class="bg-[#93005a] text-white rounded-lg p-4">
+                            Response
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-300 -z-10"></div>
+            </div>
+            <p class="text-gray-700 mt-4">
+                Middleware functions execute in sequence, each having the ability to modify the request/response 
+                objects or end the request-response cycle.
+            </p>
+        </div>
+
+        <!-- Follow Along Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Follow Along: Custom 404 Handler</h2>
+            <div class="space-y-6">
+                <p class="text-gray-700">
+                    Let's create a custom 404 handler to improve user experience when accessing non-existent endpoints.
+                </p>
+
+                <div class="bg-gray-900 rounded-lg p-6 overflow-x-auto">
+                    <pre class="text-gray-100 text-sm"><code>// Custom 404 middleware
+server.use(function(req, res) {
+    res.status(404).send("Ain't nobody got time for that!");
+});</code></pre>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <h4 class="font-bold text-gray-900 mb-2">Important Note</h4>
+                    <p class="text-gray-700">
+                        This middleware should be added <strong>after all other routes</strong>. It acts as a catch-all 
+                        for any requests that weren't handled by previous routes.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-gray-900 mb-2">Without Custom 404</h4>
+                        <p class="text-gray-700">Default response: "Cannot GET /nonexistent-route"</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h4 class="font-bold text-gray-900 mb-2">With Custom 404</h4>
+                        <p class="text-gray-700">Custom response: "Ain't nobody got time for that!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Section -->
+        <div class="bg-[#93005a] text-white rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Challenge</h2>
+            <div class="space-y-4">
+                <p class="text-lg opacity-90">
+                    Write a paragraph (or two) explaining Express middleware and how you would use it when writing Web APIs.
+                    Consider including:
+                </p>
+                <ul class="list-disc list-inside space-y-2 opacity-90">
+                    <li>What middleware is and its purpose</li>
+                    <li>The different types of middleware</li>
+                    <li>How middleware enhances API functionality</li>
+                    <li>Real-world examples of middleware usage</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-1-explain-what-node-dot-js-is-and-its-core-features.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="objective-1-explain-how-routing-works-in-an-express-application.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Objective →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

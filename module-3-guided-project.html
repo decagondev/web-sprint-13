@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Module 3 Guided Project - Express Middleware</title>
+    <meta name="identifier" content="g9a279f835a5cf7de2349ffd33a3bc17b"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Module 3 Guided Project</h1>
+            <p class="text-xl text-gray-700">Express Middleware</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Project Walkthrough</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Sprint 13 Express Middleware Video" 
+                    src="https://fast.wistia.net/embed/iframe/zk17r55iwj" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Project Resources -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <!-- Starter Code -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <h3 class="text-xl font-bold text-[#93005a] mb-4">Starter Code</h3>
+                <p class="text-gray-700 mb-4">
+                    Begin with this repository to follow along with the guided project:
+                </p>
+                <a href="https://github.com/bloominstituteoftechnology/node-api3-guided" 
+                   target="_blank"
+                   class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                    Get Starter Code
+                </a>
+            </div>
+
+            <!-- Solution Code -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <h3 class="text-xl font-bold text-[#00808c] mb-4">Solution Code</h3>
+                <p class="text-gray-700 mb-4">
+                    Reference the solution repository after completing the project:
+                </p>
+                <a href="https://github.com/bloominstituteoftechnology/node-api3-guided-solution" 
+                   target="_blank"
+                   class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                    View Solution
+                </a>
+            </div>
+        </div>
+
+        <!-- Project Overview -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Project Overview</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p>
+                    In this guided project, you'll learn about Express middleware and how it enhances your application's functionality. You'll explore:
+                </p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Understanding middleware execution flow</li>
+                    <li>Creating custom middleware functions</li>
+                    <li>Using built-in Express middleware</li>
+                    <li>Error handling middleware</li>
+                    <li>Route-specific middleware</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Key Concepts -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Key Concepts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Middleware Basics -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Middleware Basics</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Middleware function structure</li>
+                        <li>The next() function</li>
+                        <li>Middleware execution order</li>
+                        <li>Global vs route middleware</li>
+                    </ul>
+                </div>
+
+                <!-- Common Use Cases -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Common Use Cases</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Authentication/Authorization</li>
+                        <li>Request logging</li>
+                        <li>Data validation</li>
+                        <li>Error handling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Examples -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Code Examples</h2>
+            <div class="space-y-6">
+                <!-- Basic Middleware -->
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-4">Basic Middleware</h3>
+                    <pre class="text-gray-100 text-sm"><code>const logger = (req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} to ${req.url}`);
+    next();
+};
+
+server.use(logger);</code></pre>
+                </div>
+
+                <!-- Error Handling Middleware -->
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-4">Error Handling Middleware</h3>
+                    <pre class="text-gray-100 text-sm"><code>const errorHandler = (err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({
+        message: 'An error occurred',
+        error: err.message
+    });
+};
+
+server.use(errorHandler);</code></pre>
+                </div>
+
+                <!-- Route-Specific Middleware -->
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-4">Route-Specific Middleware</h3>
+                    <pre class="text-gray-100 text-sm"><code>const validateUser = (req, res, next) => {
+    const { name, email } = req.body;
+    if (!name || !email) {
+        res.status(400).json({ message: 'Missing required fields' });
+    } else {
+        next();
+    }
+};
+
+router.post('/users', validateUser, (req, res) => {
+    // Handle user creation
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Getting Started Steps -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Getting Started</h2>
+            <div class="space-y-6">
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Project Setup</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Clone the starter repository</li>
+                        <li>Install dependencies: <code class="bg-gray-200 rounded px-2 py-1">npm install</code></li>
+                        <li>Start the development server: <code class="bg-gray-200 rounded px-2 py-1">npm run server</code></li>
+                        <li>Open Postman or similar tool for testing endpoints</li>
+                    </ol>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <h4 class="font-bold text-gray-900 mb-2">Pro Tips</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Keep middleware functions focused and single-purpose</li>
+                        <li>Use descriptive names for middleware functions</li>
+                        <li>Remember to call next() unless ending the request</li>
+                        <li>Place error handling middleware last</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Challenges -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Common Challenges</h2>
+            <div class="space-y-4">
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Watch Out For:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Forgetting to call next()</li>
+                        <li>Middleware order affecting request flow</li>
+                        <li>Not handling errors properly</li>
+                        <li>Async middleware without proper error handling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Resources -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Additional Resources</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="https://expressjs.com/en/guide/using-middleware.html" 
+                   target="_blank"
+                   class="block p-4 border border-gray-200 rounded-lg hover:border-[#93005a] transition">
+                    <h4 class="font-bold text-gray-900">Express Middleware Guide</h4>
+                    <p class="text-sm text-gray-600 mt-2">Official Express.js middleware documentation</p>
+                </a>
+                <a href="https://expressjs.com/en/guide/error-handling.html" 
+                   target="_blank"
+                   class="block p-4 border border-gray-200 rounded-lg hover:border-[#93005a] transition">
+                    <h4 class="font-bold text-gray-900">Error Handling</h4>
+                    <p class="text-sm text-gray-600 mt-2">Learn about error handling middleware</p>
+                </a>
+                <a href="https://www.npmjs.com/package/morgan" 
+                   target="_blank"
+                   class="block p-4 border border-gray-200 rounded-lg hover:border-[#93005a] transition">
+                    <h4 class="font-bold text-gray-900">Morgan Logger</h4>
+                    <p class="text-sm text-gray-600 mt-2">Popular HTTP request logger middleware</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="module-2-project-solution-video.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous
+            </a>
+            <a href="module-3-project-solution-video.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Solution Video →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

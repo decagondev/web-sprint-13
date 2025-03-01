@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objective 3 - Write Error Handling Middleware</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto p-6">
+        <!-- Video Section -->
+        <div class="mb-8 rounded-lg overflow-hidden shadow-lg bg-white p-6">
+            <iframe class="w-full aspect-video rounded-lg" title="Error Handling Middleware Video" src="https://fast.wistia.net/embed/iframe/zk17r55iwj" allow="autoplay; fullscreen" loading="lazy"></iframe>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4" id="overview">Overview</h2>
+            <div class="space-y-4">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                    <p class="text-blue-700">Error handling middleware is a special type of middleware that helps manage errors in your Express application in a centralized way.</p>
+                </div>
+                
+                <h3 class="text-xl font-semibold text-gray-700">What is Error Handling Middleware?</h3>
+                <p class="text-gray-600">Error handling middleware in Express is distinguished by having four parameters instead of three:</p>
+                <code class="block bg-gray-800 text-white p-4 rounded-md my-4">
+                    (error, req, res, next) => { /* handle error */ }
+                </code>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                    <div class="bg-white p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-semibold text-gray-700 mb-2">Key Features</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li>Takes 4 parameters (error, req, res, next)</li>
+                            <li>Runs when next(error) is called</li>
+                            <li>Can handle different types of errors</li>
+                            <li>Multiple error handlers can be chained</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-semibold text-gray-700 mb-2">Best Practices</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li>Place at the end of middleware stack</li>
+                            <li>Log errors for debugging</li>
+                            <li>Send appropriate status codes</li>
+                            <li>Handle different error types differently</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Follow Along Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4" id="follow-along">Follow Along</h2>
+            
+            <div class="space-y-6">
+                <h3 class="text-xl font-semibold text-gray-700">1. Basic File Download Example</h3>
+                <div class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto">
+                    <pre><code>const express = require('express');
+const path = require('path');
+
+const server = express();
+
+server.get('/download', (req, res) => {
+    const filePath = path.join(__dirname, 'index.html');
+    res.sendFile(filePath);
+});</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-700">2. Adding Error Handling</h3>
+                <div class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto">
+                    <pre><code>server.get('/download', (req, res, next) => {
+    const filePath = path.join(__dirname, 'index.html');
+    res.sendFile(filePath, err => {
+        if (err) {
+            next(err); // Pass error to error handling middleware
+        } else {
+            console.log('File sent successfully');
+        }
+    });
+});</code></pre>
+                </div>
+
+                <h3 class="text-xl font-semibold text-gray-700">3. Implementing Error Handling Middleware</h3>
+                <div class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto">
+                    <pre><code>server.use((err, req, res, next) => {
+    console.error(err);
+    res
+        .status(500)
+        .json({ 
+            message: 'There was an error performing the required operation'
+        });
+});</code></pre>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4">
+                    <p class="text-yellow-700"><strong>Important:</strong> Error handling middleware must be defined last, after all other app.use() and routes calls.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Error Patterns Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Common Error Patterns</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Error Type</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Code</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Example</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Not Found</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">404</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Resource doesn't exist</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Bad Request</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">400</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Invalid input data</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Server Error</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">500</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Database connection failed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Challenge Section -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4" id="challenge">Challenge</h2>
+            <div class="space-y-4">
+                <p class="text-gray-600">Create a custom error handling middleware that processes different error codes:</p>
+                
+                <div class="bg-gray-800 text-white p-4 rounded-md overflow-x-auto">
+                    <pre><code>// Example solution
+server.use((err, req, res, next) => {
+    if (err.errorCode === 1404) {
+        return res.status(404).json({ 
+            message: 'Resource not found' 
+        });
+    }
+    
+    if (err.errorCode === 1500) {
+        return res.status(500).json({ 
+            message: 'Internal server error' 
+        });
+    }
+    
+    // Default error handler
+    res.status(500).json({ 
+        message: 'An unexpected error occurred' 
+    });
+});</code></pre>
+                </div>
+
+                <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                    <p class="text-green-700"><strong>Tip:</strong> Remember to test your error handler with different error codes to ensure it handles all cases correctly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-8">
+            <a href="objective-2-read-data-from-the-query-string-request-body-and-route-parameters.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="objective-3-create-an-api-that-can-respond-to-requests.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Objective →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

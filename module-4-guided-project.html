@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Module 4 Guided Project - Deployment and Best Practices</title>
+    <meta name="identifier" content="ge3f39e4bcba1771b5f72ade0c5bf7eb4"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Module 4 Guided Project</h1>
+            <p class="text-xl text-gray-700">Deployment and Best Practices</p>
+        </div>
+
+        <!-- Important Note Section -->
+        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg mb-8">
+            <h2 class="text-xl font-bold text-yellow-800 mb-4">Important Note About Deployment Options</h2>
+            <p class="text-yellow-700">
+                This Guided Project demonstrates deploying an Express application to both Heroku and Render.com. While Heroku 
+                has traditionally been a popular choice, <strong>as of November 2022 Heroku does not provide a totally free 
+                tier</strong>. As an alternative, we recommend using Render.com which offers a generous free tier perfect for 
+                personal projects. We'll cover both platforms so you can choose the one that best fits your needs.
+            </p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Project Walkthrough</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Sprint 13 Deployment and Best Practices Video" 
+                    src="https://fast.wistia.net/embed/iframe/80hzuz13ci" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Resources Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Project Resources</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Starter Repository -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Starter Repository</h3>
+                    <p class="text-gray-700 mb-4">
+                        The recording shows how to create a project from scratch, but you can use the following starter repo:
+                    </p>
+                    <a href="https://github.com/bloominstituteoftechnology/node-api4-guided" 
+                       target="_blank"
+                       class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                        Web Deployment and Best Practices
+                    </a>
+                </div>
+
+                <!-- Solution Repository -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Solution Repository</h3>
+                    <p class="text-gray-700 mb-4">
+                        Reference the solution repository for completed code:
+                    </p>
+                    <a href="https://github.com/bloominstituteoftechnology/node-api4-guided-solution" 
+                       target="_blank"
+                       class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                        View Solution Code
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Overview -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Project Overview</h2>
+            <div class="space-y-6">
+                <div class="prose max-w-none text-gray-700">
+                    <p>In this guided project, you will learn:</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>How to prepare an Express application for deployment</li>
+                        <li>Understanding environment variables and configuration</li>
+                        <li>Best practices for deployment security</li>
+                        <li>Continuous deployment setup</li>
+                        <li>Testing deployed applications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deployment Steps -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Deployment Steps</h2>
+            
+            <!-- Tab Navigation -->
+            <div class="flex space-x-4 mb-6">
+                <button onclick="switchTab('heroku')" 
+                        class="tab-button px-6 py-2 font-medium rounded-md bg-[#93005a] text-white hover:bg-opacity-90 active">
+                    Heroku Deployment
+                </button>
+                <button onclick="switchTab('render')" 
+                        class="tab-button px-6 py-2 font-medium rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">
+                    Render.com Deployment
+                </button>
+            </div>
+
+            <!-- Heroku Content -->
+            <div id="heroku-content" class="tab-content active space-y-6">
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Preparing for Heroku Deployment</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Ensure your <code class="bg-gray-100 px-2 py-1 rounded">package.json</code> has a "start" script:
+                            <pre class="bg-gray-800 text-white p-4 rounded-md mt-2">
+"scripts": {
+    "start": "node index.js"
+}</pre>
+                        </li>
+                        <li>Use environment variables for configuration:
+                            <pre class="bg-gray-800 text-white p-4 rounded-md mt-2">
+const port = process.env.PORT || 5000;</pre>
+                        </li>
+                        <li>Create a <code class="bg-gray-100 px-2 py-1 rounded">Procfile</code> (optional):
+                            <pre class="bg-gray-800 text-white p-4 rounded-md mt-2">web: npm start</pre>
+                        </li>
+                        <li>Initialize Git repository and commit changes</li>
+                    </ol>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Deploying to Heroku</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Create a Heroku account</li>
+                        <li>Install Heroku CLI</li>
+                        <li>Login to Heroku: <code class="bg-gray-100 px-2 py-1 rounded">heroku login</code></li>
+                        <li>Create Heroku app: <code class="bg-gray-100 px-2 py-1 rounded">heroku create</code></li>
+                        <li>Push to Heroku: <code class="bg-gray-100 px-2 py-1 rounded">git push heroku main</code></li>
+                        <li>Set environment variables: <code class="bg-gray-100 px-2 py-1 rounded">heroku config:set KEY=VALUE</code></li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Render.com Content -->
+            <div id="render-content" class="tab-content space-y-6">
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Preparing for Render.com Deployment</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Ensure your <code class="bg-gray-100 px-2 py-1 rounded">package.json</code> has a "start" script:
+                            <pre class="bg-gray-800 text-white p-4 rounded-md mt-2">
+"scripts": {
+    "start": "node index.js"
+}</pre>
+                        </li>
+                        <li>Use environment variables for configuration:
+                            <pre class="bg-gray-800 text-white p-4 rounded-md mt-2">
+const port = process.env.PORT || 5000;</pre>
+                        </li>
+                        <li>Push your code to a GitHub repository</li>
+                    </ol>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Deploying to Render.com</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Create a Render.com account</li>
+                        <li>Click "New +" and select "Web Service"</li>
+                        <li>Connect your GitHub repository</li>
+                        <li>Configure your service:
+                            <ul class="list-disc list-inside ml-6 mt-2 space-y-2">
+                                <li>Name: Your service name</li>
+                                <li>Environment: Node</li>
+                                <li>Build Command: <code class="bg-gray-100 px-2 py-1 rounded">npm install</code></li>
+                                <li>Start Command: <code class="bg-gray-100 px-2 py-1 rounded">npm start</code></li>
+                            </ul>
+                        </li>
+                        <li>Set environment variables in the Render dashboard</li>
+                        <li>Click "Create Web Service"</li>
+                    </ol>
+                </div>
+
+                <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg mt-4">
+                    <p class="text-green-700">
+                        <strong>Bonus:</strong> Render.com offers automatic deployments whenever you push to your GitHub repository, 
+                        and their free tier includes SSL certificates, automatic builds, and more!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Important Notes -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg mb-8">
+            <h2 class="text-xl font-bold text-blue-800 mb-4">Important Notes</h2>
+            <div class="space-y-4 text-blue-700">
+                <p>
+                    The versions of project dependencies used in the recording are slightly different from the ones used 
+                    in the starter and solution repositories, but this should not affect the relevant code of the Guided Project.
+                </p>
+                <p>
+                    The versions used in the repositories are more recent, and thus more similar to the versions you will 
+                    install if you create a project from scratch.
+                </p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-4-use-postman-to-manually-test-web-apis.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="module-4-project-solution-video.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Solution Video →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('bg-[#93005a]', 'text-white');
+                button.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            const activeButton = document.querySelector(`button[onclick="switchTab('${tabName}')"]`);
+            activeButton.classList.remove('bg-gray-200', 'text-gray-700');
+            activeButton.classList.add('bg-[#93005a]', 'text-white');
+
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-content`).classList.add('active');
+        }
+    </script>
+</body>
+</html>

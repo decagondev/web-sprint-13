@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Module 1 Guided Project - Introduction to Node.js and Express</title>
+    <meta name="identifier" content="gf574b30ff35be25b6eb6dadd45f6873e"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Module 1 Guided Project</h1>
+            <p class="text-xl text-gray-700">Introduction to Node.js and Express</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Project Walkthrough</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Sprint 13 Intro to Node.js and Express Video" 
+                    src="https://fast.wistia.net/embed/iframe/8pgwmiga69" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Project Resources -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <!-- Starter Code -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <h3 class="text-xl font-bold text-[#93005a] mb-4">Starter Code</h3>
+                <p class="text-gray-700 mb-4">
+                    Begin with this repository to follow along with the guided project:
+                </p>
+                <a href="https://github.com/bloominstituteoftechnology/node-api1-guided" 
+                   target="_blank"
+                   class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                    Get Starter Code
+                </a>
+            </div>
+
+            <!-- Solution Code -->
+            <div class="bg-white shadow-sm rounded-lg p-8">
+                <h3 class="text-xl font-bold text-[#00808c] mb-4">Solution Code</h3>
+                <p class="text-gray-700 mb-4">
+                    Reference the solution repository after completing the project:
+                </p>
+                <a href="https://github.com/bloominstituteoftechnology/node-api1-guided-solution" 
+                   target="_blank"
+                   class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                    View Solution
+                </a>
+            </div>
+        </div>
+
+        <!-- Project Overview -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Project Overview</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p>
+                    In this guided project, you'll build your first Node.js and Express application. You'll learn:
+                </p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>How to set up a Node.js project</li>
+                    <li>Creating a basic Express server</li>
+                    <li>Handling HTTP requests</li>
+                    <li>Sending responses in different formats</li>
+                    <li>Basic error handling</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Key Concepts -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Key Concepts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Node.js Basics -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Node.js Basics</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Module system (require/exports)</li>
+                        <li>Package management with npm</li>
+                        <li>Running Node.js scripts</li>
+                        <li>Understanding the event loop</li>
+                    </ul>
+                </div>
+
+                <!-- Express Fundamentals -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Express Fundamentals</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Creating an Express application</li>
+                        <li>Handling routes and requests</li>
+                        <li>Working with request/response objects</li>
+                        <li>Basic middleware usage</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Getting Started Steps -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Getting Started</h2>
+            <div class="space-y-6">
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Project Setup</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Clone the starter repository</li>
+                        <li>Install dependencies: <code class="bg-gray-200 rounded px-2 py-1">npm install</code></li>
+                        <li>Start the development server: <code class="bg-gray-200 rounded px-2 py-1">npm run server</code></li>
+                    </ol>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                    <h4 class="font-bold text-gray-900 mb-2">Pro Tips</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Use <code class="bg-gray-200 rounded px-2 py-1">nodemon</code> for automatic server restarts</li>
+                        <li>Keep the Express documentation handy</li>
+                        <li>Test your endpoints with Postman</li>
+                        <li>Check your terminal for error messages</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Challenges -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Common Challenges</h2>
+            <div class="space-y-4">
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Watch Out For:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Forgetting to restart the server after changes (if not using nodemon)</li>
+                        <li>Missing error handling in route handlers</li>
+                        <li>Incorrect Content-Type headers</li>
+                        <li>Not properly parsing request bodies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Resources -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Additional Resources</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="https://nodejs.org/docs/latest-v18.x/api/" 
+                   target="_blank"
+                   class="block p-4 border border-gray-200 rounded-lg hover:border-[#93005a] transition">
+                    <h4 class="font-bold text-gray-900">Node.js Docs</h4>
+                    <p class="text-sm text-gray-600 mt-2">Official Node.js documentation</p>
+                </a>
+                <a href="https://expressjs.com/en/starter/basic-routing.html" 
+                   target="_blank"
+                   class="block p-4 border border-gray-200 rounded-lg hover:border-[#93005a] transition">
+                    <h4 class="font-bold text-gray-900">Express Basic Routing</h4>
+                    <p class="text-sm text-gray-600 mt-2">Learn Express routing fundamentals</p>
+                </a>
+                <a href="https://www.postman.com/downloads/" 
+                   target="_blank"
+                   class="block p-4 border border-gray-200 rounded-lg hover:border-[#93005a] transition">
+                    <h4 class="font-bold text-gray-900">Postman</h4>
+                    <p class="text-sm text-gray-600 mt-2">Download Postman for API testing</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="objective-1-explain-what-middleware-is-and-the-different-types.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Previous Objective
+            </a>
+            <a href="module-1-project-solution-video.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Solution Video →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>

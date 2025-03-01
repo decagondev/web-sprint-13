@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Module 2 Project Solution Video - Server-Side Routing with Express</title>
+    <meta name="identifier" content="ga12627cd7750840ac4ccce599f7435e7"/>
+    <meta name="editing_roles" content="teachers"/>
+    <meta name="workflow_state" content="active"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Module 2 Solution</h1>
+            <p class="text-xl text-gray-700">Server-Side Routing with Express Implementation</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Solution Walkthrough</h2>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg overflow-hidden">
+                <iframe 
+                    class="w-full h-[400px]"
+                    title="Server-Side Routing with Express Video" 
+                    src="https://fast.wistia.net/embed/iframe/gfzboz62iq" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Solution Overview -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Solution Overview</h2>
+            <div class="prose max-w-none text-gray-700 space-y-4">
+                <p>
+                    In this solution, we've implemented a RESTful API using Express Router to manage user resources. 
+                    The implementation demonstrates:
+                </p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>Modular routing with Express Router</li>
+                    <li>CRUD operations for user management</li>
+                    <li>Parameter handling and data validation</li>
+                    <li>Error handling and appropriate status codes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Key Implementation Details -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Key Implementation Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project Structure -->
+                <div class="space-y-4">
+                    <div class="border-l-4 border-[#00808c] pl-4">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Project Structure</h3>
+                        <pre class="text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+project/
+├── api/
+│   ├── server.js
+│   └── users/
+│       ├── users-router.js
+│       └── users-model.js
+├── data/
+│   └── users.db
+└── index.js</pre>
+                    </div>
+                </div>
+
+                <!-- Router Implementation -->
+                <div class="space-y-4">
+                    <div class="border-l-4 border-[#93005a] pl-4">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Router Implementation</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Separated routing logic from server setup</li>
+                            <li>Implemented middleware for validation</li>
+                            <li>Added error handling for each route</li>
+                            <li>Used proper HTTP methods for CRUD</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Breakdown -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#93005a] mb-6">Code Breakdown</h2>
+            <div class="space-y-6">
+                <!-- Router Setup -->
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-4">Router Setup and Configuration</h3>
+                    <pre class="text-gray-100 text-sm"><code>// users-router.js
+const router = require('express').Router();
+const Users = require('./users-model.js');
+
+router.get('/', async (req, res, next) => {
+    try {
+        const users = await Users.find();
+        res.json(users);
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.get('/:id', validateUserId, async (req, res) => {
+    res.json(req.user);
+});</code></pre>
+                </div>
+
+                <!-- Middleware Example -->
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-4">Custom Middleware</h3>
+                    <pre class="text-gray-100 text-sm"><code>// Validation Middleware
+async function validateUserId(req, res, next) {
+    try {
+        const user = await Users.findById(req.params.id);
+        if (user) {
+            req.user = user;
+            next();
+        } else {
+            res.status(404).json({
+                message: 'User not found'
+            });
+        }
+    } catch (err) {
+        next(err);
+    }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="bg-white shadow-sm rounded-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-[#00808c] mb-6">Best Practices Implemented</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Error Handling</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Try-catch blocks</li>
+                        <li>Error middleware</li>
+                        <li>Proper status codes</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Code Organization</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Modular structure</li>
+                        <li>Separation of concerns</li>
+                        <li>Clean routing logic</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">API Design</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>RESTful endpoints</li>
+                        <li>Consistent responses</li>
+                        <li>Clear naming</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testing Instructions -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg mb-8">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Testing the Solution</h2>
+            <div class="space-y-4">
+                <p class="text-gray-700">To test the implemented endpoints:</p>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                    <li>Clone the solution repository</li>
+                    <li>Install dependencies: <code class="bg-blue-100 px-2 py-1 rounded">npm install</code></li>
+                    <li>Start the server: <code class="bg-blue-100 px-2 py-1 rounded">npm run server</code></li>
+                    <li>Use Postman or HTTPie to test the endpoints</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center">
+            <a href="module-2-guided-project.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#93005a] hover:bg-opacity-90">
+                ← Back to Project
+            </a>
+            <a href="module-3-guided-project.html" 
+               class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#00808c] hover:bg-opacity-90">
+                Next Module →
+            </a>
+        </div>
+
+        <footer class="mt-12 py-6 border-t border-gray-200 text-center text-gray-600">
+            <p>Web Unit 4 Sprint 13 Curriculum - BloomTech</p>
+        </footer>
+    </div>
+</body>
+</html>
